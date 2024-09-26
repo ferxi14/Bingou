@@ -9,12 +9,11 @@
 
 <body>
     <?php
-    $cartones = array(array(), array(), array(), array());
     $players = array(
-        ['yayo1'] => $cartones,
-        ['yayo2'] => $cartones,
-        ['yayo3'] => $cartones,
-        ['yayo4'] => $cartones
+        "yayo1" => array(array(),array(),array()),
+        "yayo2" => array(array(),array(),array()),
+        "yayo3" => array(array(),array(),array()),
+        "yayo4" => array(array(),array(),array())
     );
     var_dump($players);
 
