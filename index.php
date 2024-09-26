@@ -17,6 +17,7 @@
     );
     var_dump($players);
 
+    function rellenarCarton(){};
     ?>
 </body>
 
