@@ -82,6 +82,7 @@
         foreach ($players as $player => $cartones) {
             echo "<h3>" . $player . " </h3>";
             foreach ($cartones as $num => $carton) {
+                $num++;
                 echo "<table><caption> Carton " . $num . "</caption><tr>";
                 for ($i = 0; $i < 15; $i++) {
                     if ($i % 5 == 0 && $i != 0) {
