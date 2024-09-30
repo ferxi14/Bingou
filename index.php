@@ -56,6 +56,46 @@
             }
         }
     }
+    imprimirCartones($players);
+    $bolas = array();
+    array_push($bolas, sacarBola($bolas));
+    /**************************************************/
+    function sacarBola($bolas) {
+        $num = 0;
+
+        do {
+            $seguir = true;
+            $num = rand(1, 60);
+
+            foreach ($bolas as $bola) {
+                if ($bola == $num) {
+                    $seguir = false;
+                }
+            }
+        } while(!$seguir);
+
+        return $num;        
+    }
+    /**************************************************/
+    function imprimirCartones($players)
+    {
+        foreach ($players as $player => $cartones) {
+            echo "<h3>" . $player . " </h3>";
+            foreach ($cartones as $num => $carton) {
+                echo "<table><caption> Carton " . $num . "</caption><tr>";
+                for ($i = 0; $i < 15; $i++) {
+                    if ($i % 5 == 0 && $i != 0) {
+                        echo "</tr> <tr> <td>" . $carton[$i] . "</td>";
+                    } else {
+                        echo "<td>" . $carton[$i] . "</td>";
+                    }
+                }
+				
+                echo "</tr> </table>";
+            }
+        }
+    }
+    /**************************************************/
 
     ?>
 </body>
