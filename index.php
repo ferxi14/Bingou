@@ -33,7 +33,7 @@
         // var_dump($play);
         }
     };
-    var_dump($players);
+    // var_dump($players);
     // $arrea = array();
     // insertNum($arrea);
     // var_dump($arrea);
