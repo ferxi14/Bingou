@@ -75,6 +75,7 @@
         } while(!$seguir);
 
         comprobarBolaCartones($players, $num);
+        comprobarGanador($players);
 
         return $num;        
     }
@@ -107,6 +108,21 @@
                     for ($i = 0; $i < count($carton); $i++)
                         if ($carton[$i] == $bola)
                             $carton[$i] = "X";
+    }
+    
+    /**************************************************/
+
+    // COMPRUEBA SI ALGÚN JUGADOR HA GANADO
+    function comprobarGanador($players) {
+        foreach ($players as $player => &$cartones)
+            foreach ($cartones as &$carton) {
+                $contadorBolasCoincididas = 0;
+                for ($i = 0; $i < count($carton); $i++)
+                    if ($carton[$i] == "X")
+                        $contadorBolasCoincididas++;
+                if ($contadorBolasCoincididas == count($carton))
+                    echo "<h1>¡". $player. " hizo bingo!</h1>";
+            }
     }
     ?>
 </body>
