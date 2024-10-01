@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,13 +17,10 @@
         "yayo4" => array()
     );
 
-
-
     // RELLENA LOS CARTONES A TODOS LOS JUGADORES
     foreach($players as $p => $i){
         rellenarCarton($players[$p]);
     } 
-
 
     // INSERTA 3 ARRAYS LLENOS DE NUMEROS EN UN ARRAY QUE SE LE PASA POR PARAMETRO
     function rellenarCarton(&$play){
@@ -30,13 +28,8 @@
             $carton = array();
             insertNum($carton);
             array_push($play,$carton);
-        // var_dump($play);
         }
     };
-    // var_dump($players);
-    // $arrea = array();
-    // insertNum($arrea);
-    // var_dump($arrea);
 
     // MODIFICA UN ARRAY VACIO DANDOLE 15 NUMEROS ALEATORIOS DEL 1 AL 60 QUE NO SE REPITEN
     function insertNum(&$arr){
@@ -82,11 +75,12 @@
     /**************************************************/
     function imprimirCartones($players)
     {
+        echo "<div class='container'>";
         foreach ($players as $player => $cartones) {
-            echo "<h3>" . $player . " </h3>";
+            echo "<div class='jugador'><h3>" . $player . " </h3>";
             foreach ($cartones as $num => $carton) {
                 $num++;
-                echo "<table><caption> Carton " . $num . "</caption><tr>";
+                echo "<table border='1'><caption> Carton " . $num . "</caption><tr>";
                 for ($i = 0; $i < 15; $i++) {
                     if ($i % 5 == 0 && $i != 0) {
                         echo "</tr> <tr> <td>" . $carton[$i] . "</td>";
@@ -97,7 +91,9 @@
 				
                 echo "</tr> </table>";
             }
+            echo "</div>";
         }
+        echo "</div>";
     }
     /**************************************************/
 
@@ -109,7 +105,7 @@
                         if ($carton[$i] == $bola)
                             $carton[$i] = "X";
     }
-    
+
     /**************************************************/
 
     // COMPRUEBA SI ALGÚN JUGADOR HA GANADO
