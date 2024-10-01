@@ -58,9 +58,9 @@
     }
     imprimirCartones($players);
     $bolas = array();
-    array_push($bolas, sacarBola($bolas));
+    array_push($bolas, sacarBola($players, $bolas));
     /**************************************************/
-    function sacarBola($bolas) {
+    function sacarBola($players, $bolas) {
         $num = 0;
 
         do {
@@ -73,6 +73,8 @@
                 }
             }
         } while(!$seguir);
+
+        comprobarBolaCartones($players, $num);
 
         return $num;        
     }
@@ -98,6 +100,14 @@
     }
     /**************************************************/
 
+    // COMPRUEBA SI LA BOLA SALIDA SE ENCUENTRA EN ALGÚN CARTÓN
+    function comprobarBolaCartones(&$players, $bola) {
+        foreach ($players as $player => &$cartones)
+            foreach ($cartones as &$carton)
+                    for ($i = 0; $i < count($carton); $i++)
+                        if ($carton[$i] == $bola)
+                            $carton[$i] = "X";
+    }
     ?>
 </body>
 
