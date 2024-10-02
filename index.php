@@ -10,6 +10,8 @@
 
 <body>
     <?php
+    ini_set('max_execution_time', 1); 
+
     $players = array(
         "yayo1" => array(),
         "yayo2" => array(),
@@ -51,26 +53,28 @@
     }
     imprimirCartones($players);
     $bolas = array();
-    array_push($bolas, sacarBola($players, $bolas));
+    $hayGanador = false;
+    $ganador = "";
+    do {
+        $hayGanador = sacarBola($players, $bolas, $ganador);
+    } while(!$hayGanador);
+    echo "<h1>Ganador: ". $ganador . "</h1>";
+    imprimirCartones($players);
     /**************************************************/
-    function sacarBola($players, $bolas) {
+    function sacarBola(&$players, &$bolas, &$ganador) {
         $num = 0;
 
         do {
-            $seguir = true;
             $num = rand(1, 60);
+        } while(in_array($num, $bolas) && count($bolas) < 60);
 
-            foreach ($bolas as $bola) {
-                if ($bola == $num) {
-                    $seguir = false;
-                }
-            }
-        } while(!$seguir);
+        echo "<img src='images/". $num . ".PNG' height='70'>";
 
+        count($bolas)<60 ? array_push($bolas, $num) : "";
         comprobarBolaCartones($players, $num);
-        comprobarGanador($players);
+        $hayGanador = comprobarGanador($players, $ganador);
 
-        return $num;        
+        return $hayGanador;
     }
     /**************************************************/
     function imprimirCartones($players)
@@ -109,16 +113,20 @@
     /**************************************************/
 
     // COMPRUEBA SI ALGÚN JUGADOR HA GANADO
-    function comprobarGanador($players) {
+    function comprobarGanador($players, &$ganador) {
+        $hayGanador = false;
         foreach ($players as $player => &$cartones)
             foreach ($cartones as &$carton) {
                 $contadorBolasCoincididas = 0;
                 for ($i = 0; $i < count($carton); $i++)
                     if ($carton[$i] == "X")
                         $contadorBolasCoincididas++;
-                if ($contadorBolasCoincididas == count($carton))
-                    echo "<h1>¡". $player. " hizo bingo!</h1>";
+                if ($contadorBolasCoincididas == count($carton)) {
+                    $ganador .= $player . " ";
+                    $hayGanador = true;
+                }
             }
+        return $hayGanador;
     }
     ?>
 </body>
