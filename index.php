@@ -109,13 +109,13 @@
 
             // INICIAR JUEGO
             function iniciarJuego(&$players, &$bolas, $ajustes) {
-                $hayGanador = false;
                 $ganador = "";
             
+                echo "<h3>Bolas sacadas</h3>";
                 do {
                     $hayGanador = sacarBola($players, $bolas, $ganador, $ajustes);
                 } while(!$hayGanador);
-                echo "<h1>Ganador: ". $ganador . "</h1>";
+                echo "<h1>Ganador(es): ". $ganador . "</h1>";
             }
         
             // SACAR UNA BOLA Y COMPROBAR SI HAY GANADOR
